@@ -1,0 +1,40 @@
+overwrite: true
+schema: services/generated/schema.dev.graphql
+documents: 'services/gql/*.gql'
+hooks:
+  afterAllFileWrite:
+    - prettier --write "services/**/*.+(js|jsx|ts|tsx|json|yml|yaml|scss|css|md)"
+generates:
+  services/generated/schemas.ts:
+    plugins:
+      - typescript
+    config:
+      skipTypename: true
+  services/generated/document.ts:
+    plugins:
+      - typescript-react-apollo
+    config:
+      addDocBlocks: false
+      withMutationFn: false
+      withComponent: false
+      withHOC: false
+      withHooks: false
+      withRefetchFn: false
+      withResultType: false
+      withMutationOptionsType: false
+      gqlImport: graphql-tag
+  services/generated/operations.ts:
+    preset: import-types
+    presetConfig:
+      typesPath: ./schemas
+    plugins:
+      - typescript-operations
+    config:
+      skipTypename: true
+  services/generated/request.ts:
+    plugins:
+      - typescript-graphql-request
+    config:
+      # importOperationTypesFrom: ./operations
+      documentMode: external
+      importDocumentNodeExternallyFrom: ./operations

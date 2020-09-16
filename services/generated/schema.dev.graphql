@@ -1,0 +1,31 @@
+scalar DateTime
+scalar JSON
+scalar Upload
+
+type UploadFile {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  httpUrl: String!
+  previewUrl: String
+  provider: String!
+}
+
+type Query {
+  files: [UploadFile]
+}
+
+type Mutation {
+  upload(refId: ID, ref: String, field: String, source: String, file: Upload!): UploadFile!
+}
