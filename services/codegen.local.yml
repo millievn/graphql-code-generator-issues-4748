@@ -12,17 +12,11 @@ generates:
       skipTypename: true
   services/generated/document.ts:
     plugins:
-      - typescript-react-apollo
+      - typescript-document-nodes
     config:
-      addDocBlocks: false
-      withMutationFn: false
-      withComponent: false
-      withHOC: false
-      withHooks: false
-      withRefetchFn: false
-      withResultType: false
-      withMutationOptionsType: false
-      gqlImport: graphql-tag
+      fragmentSuffix: FragmentDoc
+      nameSuffix: Document
+      skipTypename: true
   services/generated/operations.ts:
     preset: import-types
     presetConfig:
@@ -35,6 +29,6 @@ generates:
     plugins:
       - typescript-graphql-request
     config:
-      # importOperationTypesFrom: ./operations
+      importOperationTypesFrom: ./document
       documentMode: external
       importDocumentNodeExternallyFrom: ./operations
